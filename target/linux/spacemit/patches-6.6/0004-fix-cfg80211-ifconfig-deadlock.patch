@@ -1,0 +1,60 @@
+--- a/drivers/net/wireless/realtek/rtl8852bs/os_dep/linux/ioctl_cfg80211.c
++++ b/drivers/net/wireless/realtek/rtl8852bs/os_dep/linux/ioctl_cfg80211.c
+@@ -5115,7 +5115,7 @@ static int rtw_cfg80211_add_monitor_if(_
+ 	mon_wdev->iftype = NL80211_IFTYPE_MONITOR;
+ 	mon_ndev->ieee80211_ptr = mon_wdev;
+ 
+-	ret = register_netdevice(mon_ndev);
++	ret = cfg80211_register_netdevice(mon_ndev);// 0004-patch, register_netdevice
+ 	if (ret)
+ 		goto out;
+ 
+@@ -5269,7 +5269,7 @@ static int cfg80211_rtw_del_virtual_intf
+ 		pwdev_priv = adapter_wdev_data(adapter);
+ 
+ 		if (ndev == pwdev_priv->pmon_ndev) {
+-			unregister_netdevice(ndev);
++			cfg80211_unregister_netdevice(ndev);// 0004-patch, unregister_netdevice
+ 			pwdev_priv->pmon_ndev = NULL;
+ 			pwdev_priv->ifname_mon[0] = '\0';
+ 			RTW_INFO(FUNC_NDEV_FMT" remove monitor ndev\n", FUNC_NDEV_ARG(ndev));
+--- a/drivers/net/wireless/realtek/rtl8852bs/os_dep/linux/os_intfs.c
++++ b/drivers/net/wireless/realtek/rtl8852bs/os_dep/linux/os_intfs.c
+@@ -653,7 +653,7 @@ int rtw_os_ndev_register(_adapter *adapt
+ 	if (rtnl_lock_needed)
+ 		ret = (register_netdev(ndev) == 0) ? _SUCCESS : _FAIL;
+ 	else
+-		ret = (register_netdevice(ndev) == 0) ? _SUCCESS : _FAIL;
++		ret = (cfg80211_register_netdevice(ndev) == 0) ? _SUCCESS : _FAIL; // 0004-patch, register_netdevice
+ 
+ 	if (ret == _SUCCESS)
+ 		adapter->registered = 1;
+@@ -695,7 +695,7 @@ void rtw_os_ndev_unregister(_adapter *ad
+ 		if (rtnl_lock_needed)
+ 			unregister_netdev(netdev);
+ 		else
+-			unregister_netdevice(netdev);
++			cfg80211_unregister_netdevice(netdev);// 0004-patch, unregister_netdevice
+ 	}
+ 
+ 	adapter->registered = 0;
+--- a/drivers/net/wireless/realtek/rtl8852bs/os_dep/linux/wifi_regd.c
++++ b/drivers/net/wireless/realtek/rtl8852bs/os_dep/linux/wifi_regd.c
+@@ -98,7 +98,7 @@ static struct wireless_dev *rtw_regd_all
+ 	wdev->iftype = NL80211_IFTYPE_AP;
+ 	ndev->ieee80211_ptr = wdev;
+ 
+-	ret = register_netdevice(ndev);
++	ret = cfg80211_register_netdevice(ndev); // 0004-patch, register_netdevice
+ 
+ out:
+ 	if (ret && wdev) {
+@@ -125,7 +125,7 @@ void rtw_regd_free_du_wdev(struct wiphy
+ 	if (rtnl_lock_needed)
+ 		rtnl_lock();
+ 
+-	unregister_netdevice(wiphy_data->du_wdev->netdev);
++	cfg80211_unregister_netdevice(wiphy_data->du_wdev->netdev);// 0004-patch, unregister_netdevice
+ 
+ 	if (rtnl_lock_needed)
+ 		rtnl_unlock();

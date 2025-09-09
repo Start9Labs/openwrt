@@ -1,0 +1,23 @@
+From efec00ef28c40a04b12f840c6ab80919edaad893 Mon Sep 17 00:00:00 2001
+From: chris <chris.huang@spacemit.com>
+Date: Tue, 16 Jul 2024 14:33:32 +0800
+Subject: [PATCH] fix build fail with pthread
+
+Change-Id: Ib263900710cc813fd9491496e230ed52bdbf5e45
+---
+ certs/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/certs/Makefile b/certs/Makefile
+index 799ad7b9e68a..cd9b932aa66b 100644
+--- a/certs/Makefile
++++ b/certs/Makefile
+@@ -85,4 +85,4 @@ targets += x509_revocation_list
+ hostprogs := extract-cert
+ 
+ HOSTCFLAGS_extract-cert.o = $(shell $(HOSTPKG_CONFIG) --cflags libcrypto 2> /dev/null)
+-HOSTLDLIBS_extract-cert = $(shell $(HOSTPKG_CONFIG) --libs libcrypto 2> /dev/null || echo -lcrypto)
++HOSTLDLIBS_extract-cert = -lcrypto -pthread
+-- 
+2.25.1
+
