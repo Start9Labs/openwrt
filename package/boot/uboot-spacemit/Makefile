@@ -18,10 +18,11 @@ else
 PKG_NAME:=uboot
 PKG_RELEASE:=1
 PKG_VERSION:=2022.10
-PKG_SOURCE_VERSION:=v2.0rc5
-PKG_SOURCE:=uboot-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
-PKG_SOURCE_URL:=https://archive.spacemit.com/openwrt/dl/
-PKG_HASH:=skip
+
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://github.com/spacemit-com/uboot-2022.10.git
+PKG_SOURCE_VERSION:=d61c8c77e241314438dce31d9ff1b1cbd9d53688
+PKG_MIRROR_HASH:=skip
 endif
 
 include $(INCLUDE_DIR)/package.mk

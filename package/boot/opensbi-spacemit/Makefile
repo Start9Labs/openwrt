@@ -16,11 +16,11 @@ else
 PKG_NAME:=opensbi
 PKG_RELEASE:=1
 PKG_VERSION:=1.3
-PKG_SOURCE_VERSION:=v2.0rc5
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
-PKG_SOURCE_URL:=https://archive.spacemit.com/openwrt/dl/
-PKG_HASH:=skip
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://github.com/spacemit-com/opensbi.git
+PKG_SOURCE_VERSION:=05479f5228f3fab2a4221fe0745f3703171ace58
+PKG_MIRROR_HASH:=skip
 endif
 
 PKG_TARGETS:=bin
