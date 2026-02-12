@@ -59,7 +59,7 @@ define PackageDir
 		}; \
 		echo; \
 	} > $$@.tmp
-	mv $$@.tmp $$@
+	mv -f $$@.tmp $$@
 endef
 
 $(OVERRIDELIST):
@@ -96,7 +96,7 @@ $(TMP_DIR)/info/.files-$(SCAN_TARGET).mk: $(FILELIST)
 		} ' < $<; \
 		true; \
 	) > $@.tmp
-	mv $@.tmp $@
+	mv -f $@.tmp $@
 
 -include $(TMP_DIR)/info/.files-$(SCAN_TARGET).mk
 
