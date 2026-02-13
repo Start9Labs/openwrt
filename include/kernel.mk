@@ -62,10 +62,6 @@ else
       LINUX_SOURCE:=linux-$(LINUX_VERSION).tar.xz
   endif
 
-  ifeq ($(BOARD),spacemit)
-      LINUX_SOURCE:=$(LINUX_VERSION_CUSTOM).tar.xz
-  endif
-
   ifneq (,$(findstring -rc,$(LINUX_VERSION)))
       LINUX_SITE:=https://git.kernel.org/torvalds/t
   else ifeq ($(call qstrip,$(CONFIG_EXTERNAL_KERNEL_TREE))$(call qstrip,$(CONFIG_KERNEL_GIT_CLONE_URI)),)
