@@ -219,9 +219,7 @@
 	};
 };
 
-&lcds {
-	status = "disabled";
-};
+
 
 &dpu_online2_hdmi {
 	memory-region = <&dpu_resv>;
@@ -1046,7 +1044,7 @@
 	pinctrl-0 = <&pinctrl_rcpu>;
 	mboxes = <&mailbox 0>, <&mailbox 1>;
 	mbox-names = "vq0", "vq1";
-	memory-region = <&rcpu_mem_0>, <&vdev0vring0>, <&vdev0vring1>, <&vdev0buffer>, <&rsc_table>, <&rcpu_mem_snapshots>;
+	memory-region = <&rcpu_mem_0>, <&vdev0vring0>, <&vdev0vring1>, <&vdev0buffer>, <&rsc_table>;
 	status = "disabled";
 };
 
@@ -1079,7 +1077,7 @@
 	status = "disabled";
 };
 
-&hdmi_sspa {
+&hdmiaudio {
 	status = "disabled";
 };
 
