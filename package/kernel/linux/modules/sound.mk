@@ -70,6 +70,17 @@ define KernelPackage/sound-core/uml
   AUTOLOAD+=$(call AutoLoad,30,soundcore hostaudio)
 endef
 
+# SpacemiT K1 builds most sound core as built-in (=y); only a few modules
+# exist as .ko.  SND_HWDEP is a hidden tristate with no selecting driver,
+# so olddefconfig strips it.  Override FILES/AUTOLOAD to match reality.
+define KernelPackage/sound-core/spacemit
+  FILES:= \
+	$(LINUX_DIR)/sound/core/snd-seq-device.ko \
+	$(LINUX_DIR)/sound/core/snd-rawmidi.ko \
+	$(LINUX_DIR)/sound/core/oss/snd-pcm-oss.ko
+  AUTOLOAD:=$(call AutoLoad,30,snd-seq-device snd-rawmidi snd-pcm-oss)
+endef
+
 define KernelPackage/sound-core/description
  Kernel modules for sound support
 endef
