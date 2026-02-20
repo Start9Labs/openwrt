@@ -62,7 +62,8 @@ set $(ptgen -o $OUTPUT -v -g -h $head -s $sect \
     -N opensbi -p $OPENSBI_SIZE \
     -N uboot -p ${UBOOT_SIZE}M \
     -N bootfs -p ${BOOTFS_SIZE}M \
-    -N rootfs -p ${ROOTFS_SIZE}M)
+    -N rootfs -p ${ROOTFS_SIZE}M \
+    -N persistent -p 32M)
 
 OPENSBI_OFFSET=$(($5 / 1024))
 UBOOT_OFFSET=$(($7 / 1024))
