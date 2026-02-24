@@ -37,7 +37,7 @@ endef
 define Build/archive-zip
 	rm -f $@
 
-	cp -f $(IMAGE_ROOTFS) $(KDIR_TMP)/rootfs.ext4
+	cp -f $(IMAGE_ROOTFS) $(KDIR_TMP)/rootfs.squashfs
 	cp -f $@.boot $(KDIR_TMP)/bootfs.img
 	cp -f partition_tables/* $(KDIR_TMP)/
 

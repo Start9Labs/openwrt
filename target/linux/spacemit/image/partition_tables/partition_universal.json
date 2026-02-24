@@ -43,9 +43,13 @@
         {
             "name": "rootfs",
             "offset": "260M",
-            "size": "512M",
-            "image": "rootfs.ext4",
+            "size": "256M",
+            "image": "rootfs.squashfs",
             "compress": "gzip-5"
+        },
+        {
+            "name": "rootfs_data",
+            "size": "256M"
         },
         {
             "name": "persistent",

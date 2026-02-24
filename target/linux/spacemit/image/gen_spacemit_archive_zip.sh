@@ -40,7 +40,7 @@ pack_image_zip() {
         u-boot.itb \
         env.bin \
         bootfs.img \
-        rootfs.ext4 \
+        rootfs.squashfs \
         partition_*.json \
         fastboot.yaml \
         genimage.cfg \

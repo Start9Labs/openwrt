@@ -7,7 +7,7 @@ include $(TOPDIR)/rules.mk
 ARCH:=riscv64
 BOARD:=spacemit
 BOARDNAME:=Spacemit RISC-V Chipsets
-FEATURES:=ext4
+FEATURES:=ext4 squashfs
 KERNELNAME:=Image dtbs
 SUBTARGETS:=k1-nas k1-sbc
 
