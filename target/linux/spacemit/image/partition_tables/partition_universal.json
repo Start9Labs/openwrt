@@ -52,7 +52,7 @@
             "size": "256M"
         },
         {
-            "name": "persistent",
+            "name": "key_backup",
             "size": "-"
         }
     ]
