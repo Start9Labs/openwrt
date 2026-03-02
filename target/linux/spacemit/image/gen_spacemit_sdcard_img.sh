@@ -52,6 +52,7 @@ ROOTFS="$3"
 #${IMGS_DIR}/$(jq '.partitions[] | select(.name == "rootfs") | .image' "$2" | sed 's/["]//g')
 
 ROOTFS_SIZE=$5
+ROOTFS_DATA_SIZE=$(jq -r '.partitions[] | select(.name=="rootfs_data") | .size' "$4" | sed 's/[mM]//')
 head=4
 sect=63
 
@@ -62,7 +63,9 @@ set $(ptgen -o $OUTPUT -v -g -h $head -s $sect \
     -N opensbi -p $OPENSBI_SIZE \
     -N uboot -p ${UBOOT_SIZE}M \
     -N bootfs -p ${BOOTFS_SIZE}M \
-    -N rootfs -p ${ROOTFS_SIZE}M)
+    -N rootfs -p ${ROOTFS_SIZE}M \
+    -N rootfs_data -p ${ROOTFS_DATA_SIZE}M \
+    -N key_backup -p 32M)
 
 OPENSBI_OFFSET=$(($5 / 1024))
 UBOOT_OFFSET=$(($7 / 1024))
