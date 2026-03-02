@@ -7,6 +7,7 @@ define Device/debX
   DEVICE_MODEL :=k1-x deb board
   DEVICE_DTS_DIR:= ../dts
   DEVICE_DTS := k1-x_deb1 k1-x_MUSE-Pi 
+  FILESYSTEMS := squashfs
   SOC := KeyStone
   KERNEL_NAME := Image
   KERNEL_IMG := Image.itb
