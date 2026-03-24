@@ -26,11 +26,16 @@ remove_uri_prefix=$(subst git://,,$(subst http://,,$(subst https://,,$(1))))
 sanitize_uri=$(call qstrip,$(subst @,_,$(subst :,_,$(subst .,_,$(subst -,_,$(subst /,_,$(1)))))))
 
 ifneq ($(call qstrip,$(CONFIG_KERNEL_GIT_CLONE_URI)),)
-  LINUX_VERSION:=$(call sanitize_uri,$(call remove_uri_prefix,$(CONFIG_KERNEL_GIT_CLONE_URI)))
   ifeq ($(call qstrip,$(CONFIG_KERNEL_GIT_REF)),)
     CONFIG_KERNEL_GIT_REF:=HEAD
   endif
-  LINUX_VERSION:=$(LINUX_VERSION)-$(call sanitize_uri,$(CONFIG_KERNEL_GIT_REF))
+  # Use the clean version from the kernel-<patchver> file (e.g., "6.18.19")
+  # instead of encoding the git URL into LINUX_VERSION. The URL-derived
+  # string was used historically for opkg, but APK requires strict version
+  # format (digits, dots, hyphens only). The clean version is sufficient
+  # since KERNEL_PATCHVER already uniquely identifies the kernel series,
+  # and the git ref is recorded in CONFIG_KERNEL_GIT_REF.
+  LINUX_VERSION:=$(KERNEL_PATCHVER)$(strip $(LINUX_VERSION-$(KERNEL_PATCHVER)))
 else
 ifdef KERNEL_PATCHVER
   LINUX_VERSION:=$(KERNEL_PATCHVER)$(strip $(LINUX_VERSION-$(KERNEL_PATCHVER)))
