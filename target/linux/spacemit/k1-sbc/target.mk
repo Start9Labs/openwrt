@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 
 ARCH:=riscv64
 BOARDNAME:=Spacemit K1 SBC
-CPU_TYPE:=riscv64
+CPU_TYPE:=generic
 KERNELNAME:=Image dtbs
 DEVICE_TYPE:=router
 
