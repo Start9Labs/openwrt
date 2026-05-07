@@ -41,10 +41,6 @@
             "compress": "gzip-5"
         },
         {
-            "name": "key_backup",
-            "size": "-"
-        },
-        {
             "name": "rootfs",
             "offset": "68M",
             "size": "256M",
