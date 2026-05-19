@@ -24,7 +24,12 @@ define Build/boot-common
 	mcopy -i $@.boot env_k1-x.txt ::
 	$(foreach dts,$(shell echo $(DEVICE_DTS)),mcopy -i $@.boot $(KDIR)/image-$(dts).dtb ::$(dts).dtb;)
 
-	cp -rf $(STAGING_DIR_IMAGE)/* $(KDIR_TMP)/
+	# boot-common runs once per IMAGE/ variant (sdcard.img and
+	# sysupgrade.img.gz), and KDIR_TMP is shared between them. Under a
+	# parallel build the two recipes race here, so use rsync rather than
+	# cp -rf: rsync stages each file under a temp name and renames it
+	# atomically, and merges into pre-existing directories without error.
+	rsync -a $(STAGING_DIR_IMAGE)/ $(KDIR_TMP)/
 endef
 
 define Build/sdcard-img
